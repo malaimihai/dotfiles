@@ -1,0 +1,128 @@
+@import "catppuccin-macchiato"
+
+configuration {
+    font: "Caskaydia Cove Nerd Font 14";
+
+}
+
+* {
+    /*
+  selected-active-foreground:  @background;
+  lightfg:                     @text;
+  separatorcolor:              @foreground;
+  urgent-foreground:           @red;
+  alternate-urgent-background: @lightbg;
+  lightbg:                     @mantle;
+  background-color:            transparent;
+  border-color:                @foreground;
+  normal-background:           @background;
+  selected-urgent-background:  @red;
+  alternate-active-background: @lightbg;
+  spacing:                     2;
+  alternate-normal-foreground: @foreground;
+  urgent-background:           @background;
+  selected-normal-foreground:  @lightbg;
+  active-foreground:           @blue;
+  background:                  @base;
+  selected-active-background:  @blue;
+  active-background:           @background;
+  selected-normal-background:  @lightfg;
+  alternate-normal-background: @lightbg;
+  foreground:                  @text;
+  selected-urgent-foreground:  @background;
+  normal-foreground:           @foreground;
+  alternate-urgent-foreground: @red;
+  alternate-active-foreground: @blue;
+
+  border-radius: 10px;
+  spacing: 4px;
+  padding: 8px;
+  background-color: transparent;
+  */
+    background:  transparent;
+
+
+}
+
+
+window {
+    width: 800px;
+    height: 500px;
+    transparency: "real";
+    border: 2px;
+    border-color: rgba(138, 173, 244, 0.93);
+    border-radius: 10px;
+    padding: 0;
+}
+
+mainbox {
+    background-color: rgba(36, 39, 58, 0.93);
+    border-radius: 8px;
+    padding: 15px 20px;
+}
+
+inputbar {
+    padding:    10px ;
+    spacing:    0px ;
+    text-color: @text;
+    children: [ prompt, textbox-prompt-colon, entry ];
+}
+
+
+prompt {
+    enabled: false;
+}
+
+textbox-prompt-colon {
+    margin:     0px 0.3000em 0.0000em 0.0000em ;
+    expand:     false;
+    str:        " ";
+    text-color: inherit;
+}
+
+entry {
+    text-color:        @text;
+    cursor:            text;
+    spacing:           0;
+    placeholder-color: @overlay2;
+    placeholder:       "Search...";
+}
+
+listview {
+    border: 0;
+    padding: 15px 0 0 0;
+    spacing: 6px;
+}
+
+element {
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+}
+
+
+element normal.normal {
+    color: @text;
+}
+
+
+element alternate.normal {
+    background-color: transparent;
+    color: @text;
+}
+
+element selected.normal {
+    background-color: @mauve;
+    color: @base;
+}
+
+element-icon {
+    size: 40px;
+}
+
+element-text {
+    padding: 7px 0;
+}
+
+

@@ -1,0 +1,51 @@
+@import "macchiato.css";
+
+* {
+  font-family: "Caskaydia Cove Nerd Font";
+  font-size: 14px;
+  padding: 0;
+  margin: 2.5 3.5;
+}
+
+window#waybar {
+  background-color: rgba(110, 115, 141, 0.2);
+}
+
+#workspaces {
+  background: linear-gradient(135deg, @crust, @surface0);
+  padding: 0 10px;
+  border-radius: 20px;
+}
+
+#workspaces button {
+  color: @text;
+}
+
+#workspaces button.active {
+  color: @sapphire;
+}
+
+#clock {
+  background: linear-gradient(135deg, @crust, @surface0);
+  color: @text;
+  padding: 0 10px;
+  border-radius: 20px;
+}
+
+#sys {
+  background: linear-gradient(135deg, @crust, @surface0);
+  color: @text;
+  padding: 0 10px;
+  border-radius: 20px;
+}
+
+#cpu {
+  margin-left: 15px;
+}
+
+#pulseaudio {
+  background: linear-gradient(135deg, @crust, @surface0);
+  color: @text;
+  padding: 0 10px;
+  border-radius: 20px;
+}

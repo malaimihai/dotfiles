@@ -1,0 +1,44 @@
+{
+  "position": "top",
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": ["group/sys", "pulseaudio"],
+  "clock": {
+    "format": "<span foreground='#cad3f5'>  </span>{:%a %d %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "group/sys": {
+    "orientation": "horizontal",
+    "modules": ["memory", "cpu", "custom/cpu-temp", "custom/nvidia"]
+  },
+  "custom/nvidia": {
+    "exec": "~/.config/waybar/scripts/nvidia-power.sh",
+    "interval": 2,
+    "return-type": "plain",
+    "tooltip": false
+  },
+  "custom/cpu-temp": {
+    "exec": "~/.config/waybar/scripts/cpu-temp.sh",
+    "interval": 2,
+    "return-type": "plain",
+    "tooltip": false
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {}%",
+    "max-length": 10
+  },
+  "cpu": {
+    "interval": 10,
+    "format": " {}%",
+    "max-length": 10
+  },
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
+  }
+}
