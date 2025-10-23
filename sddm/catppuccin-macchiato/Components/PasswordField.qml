@@ -9,6 +9,7 @@ Item {
 
   // configure
   property string user: "mm"                   // your fixed username
+  property int session: 0
   property string fontFamily: "CaskaydiaCove Nerd Font"
   property color baseBorder: "#7dc4e4"         // idle border
   property color capsBorder: "#f5a97f"         // caps_lock_enabled
@@ -102,51 +103,3 @@ Item {
     }
   }
 }
-
-// TextField {
-//   id: passwordField
-//   focus: true
-//   selectByMouse: true
-//   placeholderText: "Password"
-//   echoMode: TextInput.Password
-//   passwordCharacter: "•"
-//   passwordMaskDelay: config.PasswordShowLastLetter
-//   selectionColor: "#6E738D"
-//   renderType: Text.NativeRendering
-//   font {
-//     family: config.Font
-//     pointSize: config.FontSize
-//     bold: true
-//   }
-//   color: "#CAD3F5"
-//   horizontalAlignment: TextInput.AlignHCenter
-//   background: Rectangle {
-//     id: passFieldBackground
-//     radius: 3
-//     color: "#363A4F"
-//   }
-//   states: [
-//     State {
-//       name: "focused"
-//       when: passwordField.activeFocus
-//       PropertyChanges {
-//         target: passFieldBackground
-//         color: "#494D64"
-//       }
-//     },
-//     State {
-//       name: "hovered"
-//       when: passwordField.hovered
-//       PropertyChanges {
-//         target: passFieldBackground
-//         color: "#494D64"
-//       }
-//     }
-//   ]
-//   transitions: Transition {
-//     PropertyAnimation {
-//       properties: "color"
-//       duration: 300
-//     }
-//   }
-// }

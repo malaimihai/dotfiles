@@ -23,13 +23,13 @@ Item {
         }
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        color: "#CAD3F5"
+        color: sessionEntry.highlighted ? "#24273a" : "#CAD3F5"
         text: name
       }
       background: Rectangle {
         id: sessionEntryBackground
-        color: "#494D64"
-        radius: 3
+        color: sessionEntry.highlighted ? "#c6a0f6" : "#24273a"
+        radius: 10
       }
       states: [
         State {
@@ -37,7 +37,11 @@ Item {
           when: sessionEntry.hovered
           PropertyChanges {
             target: sessionEntryBackground
-            color: "#5B6078"
+            color: "#c6a0f6"
+          }
+          PropertyChanges {
+            target: sessionEntry.contentItem
+            color: "#24273a"
           }
         }
       ]
@@ -69,8 +73,8 @@ Item {
     }
     background: Rectangle {
       id: sessionButtonBackground
-      color: "#363A4F"
-      radius: 3
+      color: "#24273a"
+      radius: 15
     }
     states: [
       State {
@@ -78,7 +82,7 @@ Item {
         when: sessionButton.down
         PropertyChanges {
           target: sessionButtonBackground
-          color: "#494D64"
+          color: "#5b6078"
         }
       },
       State {
@@ -86,7 +90,7 @@ Item {
         when: sessionButton.hovered
         PropertyChanges {
           target: sessionButtonBackground
-          color: "#5B6078"
+          color: "#5b6078"
         }
       },
       State {
@@ -94,7 +98,7 @@ Item {
         when: sessionPopup.visible
         PropertyChanges {
           target: sessionButtonBackground
-          color: "#5B6078"
+          color: "#5b6078"
         }
       }
     ]
@@ -112,12 +116,12 @@ Item {
   Popup {
     id: sessionPopup
     width: inputWidth + padding * 2
-    x: (sessionButton.width + sessionList.spacing) * -7.6
+    x: (sessionButton.width + sessionList.spacing) * -8
     y: -(contentHeight + padding * 2) + sessionButton.height
     padding: inputHeight / 10
     background: Rectangle {
-      radius: 5.4
-      color: "#363A4F"
+      radius: 15
+      color: "#24273a"
     }
     contentItem: ListView {
       id: sessionList
