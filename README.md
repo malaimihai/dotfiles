@@ -30,3 +30,25 @@ First install dependencies:
 ```bash
 pacman -Syu qt6-svg qt6-declarative qt5-quickcontrols2
 ```
+
+Make sure that Caskaydia Nerd Font is available system wide.
+It should be listed in `/usr/share/fonts`:
+
+```bash
+fc-list | grep "CaskaydiaCove Nerd Font"
+```
+
+Then copy the theme to the sddm themes directory:
+
+```bash
+sudo cp -r sddm/catppuccin-macchiato/ /usr/share/sddm/themes/
+```
+
+Finally, set the theme in the sddm configuration file `/etc/sddm.conf`:
+
+```ini
+[Theme]
+Current=catppuccin-macchiato
+```
+
+Restart sddm to see the changes.
