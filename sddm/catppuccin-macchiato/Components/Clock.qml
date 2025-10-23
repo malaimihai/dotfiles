@@ -14,7 +14,7 @@ Item {
   Text {
     id: timeText
     anchors.horizontalCenter: parent.horizontalCenter
-    anchors.top: parent.top; anchors.topMargin: 430
+    anchors.top: parent.top; anchors.topMargin: 530
     text: Qt.formatDateTime(clock.now, "HH:mm")
     font.pixelSize: 120
     font.family: config.Font
@@ -24,7 +24,7 @@ Item {
   Text {
     anchors.horizontalCenter: timeText.horizontalCenter
     anchors.top: timeText.bottom; anchors.topMargin: 8
-    text: Qt.formatDateTime(clock.now, "dddd, dd MMM yyyy")
+    text: Qt.formatDateTime(clock.now, "dddd, dd MMMM yyyy")
     font.pixelSize: 27
     font.family: config.Font
     color: "#CAD3F5"

@@ -4,23 +4,23 @@ import QtQuick.Controls 2.15
 import "../assets"
 
 Item {
-  property var user: userField.text
+  property var user: "mm"
   property var password: passwordField.text
   property var session: sessionPanel.session
   property var inputHeight: Screen.height * 0.032
   property var inputWidth: Screen.width * 0.16
-  Rectangle {
-    id: loginBackground
-    anchors {
-      verticalCenter: parent.verticalCenter
-      horizontalCenter: parent.horizontalCenter
-    }
-    height: inputHeight * ( config.UserIcon == "true" ? 11.2 : 5.3 )
-    width: inputWidth * 1.2
-    radius: 5
-    visible: config.LoginBackground == "true" ? true : false
-    color: "#1E2030"
-  }
+//   Rectangle {
+//     id: loginBackground
+//     anchors {
+//       verticalCenter: parent.verticalCenter
+//       horizontalCenter: parent.horizontalCenter
+//     }
+//     height: inputHeight * ( config.UserIcon == "true" ? 11.2 : 5.3 )
+//     width: inputWidth * 1.2
+//     radius: 5
+//     visible: config.LoginBackground == "true" ? true : false
+//     color: "#1E2030"
+//   }
   Column {
     spacing: 8
     anchors {
@@ -86,85 +86,85 @@ Item {
         horizontalCenter: parent.horizontalCenter
       }
     }
-    UserField {
-      id: userField
-      height: inputHeight
-      width: parent.width
-    }
+    // PasswordField {
+    //   id: passwordField
+    //   height: inputHeight
+    //   width: parent.width
+    //   onAccepted: loginButton.clicked()
+    // }
     PasswordField {
       id: passwordField
-      height: inputHeight
-      width: parent.width
-      onAccepted: loginButton.clicked()
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.verticalCenter: parent.verticalCenter
     }
-    Button {
-      id: loginButton
-      height: inputHeight
-      width: parent.width
-      enabled: user != "" && password != "" ? true : false
-      hoverEnabled: true
-      contentItem: Text {
-        id: buttonText
-        renderType: Text.NativeRendering
-        font {
-          family: config.Font
-          pointSize: config.FontSize
-          bold: true
-        }
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        color: "#181926"
-        text: "Login"
-      }
-      background: Rectangle {
-        id: buttonBackground
-        color: "#8AADF4"
-        radius: 3
-      }
-      states: [
-        State {
-          name: "pressed"
-          when: loginButton.down
-          PropertyChanges {
-            target: buttonBackground
-            color: "#A5ADCB"
-          }
-          PropertyChanges {
-            target: buttonText
-          }
-        },
-        State {
-          name: "hovered"
-          when: loginButton.hovered
-          PropertyChanges {
-            target: buttonBackground
-            color: "#A5ADCB"
-          }
-          PropertyChanges {
-            target: buttonText
-          }
-        },
-        State {
-          name: "enabled"
-          when: loginButton.enabled
-          PropertyChanges {
-            target: buttonBackground
-          }
-          PropertyChanges {
-            target: buttonText
-          }
-        }
-      ]
-      transitions: Transition {
-        PropertyAnimation {
-          properties: "color"
-          duration: 300
-        }
-      }
-      onClicked: {
-        sddm.login(user, password, session)
-      }
-    }
+    // Button {
+    //   id: loginButton
+    //   height: inputHeight
+    //   width: parent.width
+    //   enabled: user != "" && password != "" ? true : false
+    //   hoverEnabled: true
+    //   contentItem: Text {
+    //     id: buttonText
+    //     renderType: Text.NativeRendering
+    //     font {
+    //       family: config.Font
+    //       pointSize: config.FontSize
+    //       bold: true
+    //     }
+    //     horizontalAlignment: Text.AlignHCenter
+    //     verticalAlignment: Text.AlignVCenter
+    //     color: "#181926"
+    //     text: "Login"
+    //   }
+    //   background: Rectangle {
+    //     id: buttonBackground
+    //     color: "#8AADF4"
+    //     radius: 3
+    //   }
+    //   states: [
+    //     State {
+    //       name: "pressed"
+    //       when: loginButton.down
+    //       PropertyChanges {
+    //         target: buttonBackground
+    //         color: "#A5ADCB"
+    //       }
+    //       PropertyChanges {
+    //         target: buttonText
+    //       }
+    //     },
+    //     State {
+    //       name: "hovered"
+    //       when: loginButton.hovered
+    //       PropertyChanges {
+    //         target: buttonBackground
+    //         color: "#A5ADCB"
+    //       }
+    //       PropertyChanges {
+    //         target: buttonText
+    //       }
+    //     },
+    //     State {
+    //       name: "enabled"
+    //       when: loginButton.enabled
+    //       PropertyChanges {
+    //         target: buttonBackground
+    //       }
+    //       PropertyChanges {
+    //         target: buttonText
+    //       }
+    //     }
+    //   ]
+    //   transitions: Transition {
+    //     PropertyAnimation {
+    //       properties: "color"
+    //       duration: 300
+    //     }
+    //   }
+    //   onClicked: {
+    //     sddm.login(user, password, session)
+    //   }
+    // }
   }
   Connections {
     target: sddm

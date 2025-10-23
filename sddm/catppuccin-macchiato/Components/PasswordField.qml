@@ -1,50 +1,152 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
-TextField {
-  id: passwordField
-  focus: true
-  selectByMouse: true
-  placeholderText: "Password"
-  echoMode: TextInput.Password
-  passwordCharacter: "•"
-  passwordMaskDelay: config.PasswordShowLastLetter
-  selectionColor: "#6E738D"
-  renderType: Text.NativeRendering
-  font {
-    family: config.Font
-    pointSize: config.FontSize
-    bold: true
+
+Item {
+  id: root
+  width: 300
+  height: 65
+
+  // configure
+  property string user: "mm"                   // your fixed username
+  property string fontFamily: "CaskaydiaCove Nerd Font"
+  property color baseBorder: "#7dc4e4"         // idle border
+  property color capsBorder: "#f5a97f"         // caps_lock_enabled
+  property color loadingBorder: "#a6da95"      // loading_checking
+  property color failedBorder: "#ed8796"       // failed
+
+  // state flags
+  property bool capsOn: false
+  property bool loading: false
+  property bool failed: false
+
+  // border color resolver (priority: failed > loading > caps > base)
+  function borderColor() {
+    if (failed) return failedBorder;
+    if (loading) return loadingBorder;
+    if (capsOn) return capsBorder;
+    return baseBorder;
   }
-  color: "#CAD3F5"
-  horizontalAlignment: TextInput.AlignHCenter
-  background: Rectangle {
-    id: passFieldBackground
-    radius: 3
-    color: "#363A4F"
-  }
-  states: [
-    State {
-      name: "focused"
-      when: passwordField.activeFocus
-      PropertyChanges {
-        target: passFieldBackground
-        color: "#494D64"
+
+  Rectangle {
+    id: frame
+    anchors.fill: parent
+    radius: 122
+    color: "#363a4f"
+    border.width: 4
+    border.color: root.borderColor()
+
+    // Smooth border color transitions
+    Behavior on border.color { ColorAnimation { duration: 500 } }
+
+    // the actual password field, full-bleed inside the frame
+    TextField {
+      id: passwordField
+      anchors.fill: parent
+      anchors.margins: 0
+      focus: true
+      horizontalAlignment: TextInput.AlignHCenter
+      verticalAlignment: TextInput.AlignVCenter
+
+      echoMode: TextInput.Password
+      passwordCharacter: "•"
+      selectByMouse: true
+      renderType: Text.NativeRendering
+      color: "#CAD3F5"
+      background: null
+
+      font.family: root.fontFamily
+      font.pixelSize: 20
+      font.bold: true
+
+      // No button: Enter submits
+      onAccepted: {
+        if (text.length === 0) return;
+        root.failed = false;
+        root.loading = true;
+        sddm.login(root.user, text, root.session)
       }
-    },
-    State {
-      name: "hovered"
-      when: passwordField.hovered
-      PropertyChanges {
-        target: passFieldBackground
-        color: "#494D64"
+
+      // Track caps lock toggles (best we can do in QML)
+      Keys.onPressed: (ev) => {
+        if (ev.key === Qt.Key_CapsLock) {
+          root.capsOn = !root.capsOn;
+          ev.accepted = true;
+        }
       }
     }
-  ]
-  transitions: Transition {
-    PropertyAnimation {
-      properties: "color"
-      duration: 300
+
+    // Custom rich-text placeholder (since TextField placeholder can't style)
+    Text {
+      anchors.centerIn: parent
+      visible: passwordField.text.length === 0 && !root.loading
+      textFormat: Text.RichText
+      color: "#cad3f5"
+      font.family: config.Font
+      font.pixelSize: 20
+      text: "󰌾 <i> Password for </i><span style=\"color:#c6a0f6\"><b>"+ root.user +"</b></span>"
+    }
+  }
+
+
+
+  // Hook SDDM failure to flip states
+  Connections {
+    target: sddm
+    function onLoginFailed() {
+      root.loading = false;
+      root.failed = true;
+      // clear the field and refocus
+      frame.children[0].text = "";
+      frame.children[0].forceActiveFocus();
     }
   }
 }
+
+// TextField {
+//   id: passwordField
+//   focus: true
+//   selectByMouse: true
+//   placeholderText: "Password"
+//   echoMode: TextInput.Password
+//   passwordCharacter: "•"
+//   passwordMaskDelay: config.PasswordShowLastLetter
+//   selectionColor: "#6E738D"
+//   renderType: Text.NativeRendering
+//   font {
+//     family: config.Font
+//     pointSize: config.FontSize
+//     bold: true
+//   }
+//   color: "#CAD3F5"
+//   horizontalAlignment: TextInput.AlignHCenter
+//   background: Rectangle {
+//     id: passFieldBackground
+//     radius: 3
+//     color: "#363A4F"
+//   }
+//   states: [
+//     State {
+//       name: "focused"
+//       when: passwordField.activeFocus
+//       PropertyChanges {
+//         target: passFieldBackground
+//         color: "#494D64"
+//       }
+//     },
+//     State {
+//       name: "hovered"
+//       when: passwordField.hovered
+//       PropertyChanges {
+//         target: passFieldBackground
+//         color: "#494D64"
+//       }
+//     }
+//   ]
+//   transitions: Transition {
+//     PropertyAnimation {
+//       properties: "color"
+//       duration: 300
+//     }
+//   }
+// }
