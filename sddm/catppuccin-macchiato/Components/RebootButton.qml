@@ -13,23 +13,19 @@ Item {
       source: Qt.resolvedUrl("../icons/reboot.svg")
       height: height
       width: width
-      color: "#181926"
+      color: hovered ? "#24273a" : "#CAD3F5"
     }
     background: Rectangle {
       id: rebootButtonBackground
-      radius: 3
-      color: "#ED8796"
+      radius: 15
+      color: rebootButton.hovered ? "#c6a0f6" : "#24273a"
     }
-    states: [
-      State {
-        name: "hovered"
-        when: rebootButton.hovered
-        PropertyChanges {
-          target: rebootButtonBackground
-          color: "#F4DBD6"
-        }
-      }
-    ]
+    MouseArea {
+      anchors.fill: parent
+      hoverEnabled: true
+      cursorShape: Qt.PointingHandCursor
+      onClicked: sessionButton.clicked()  // propagate the click
+    }
     transitions: Transition {
       PropertyAnimation {
         properties: "color"

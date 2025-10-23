@@ -13,23 +13,19 @@ Item {
       source: Qt.resolvedUrl("../icons/sleep.svg")
       height: height
       width: width
-      color: "#181926"
+      color: hovered ? "#24273a" : "#CAD3F5"
     }
     background: Rectangle {
       id: sleepButtonBg
-      color: "#ED8796"
-      radius: 3
+      color: sleepButton.hovered ? "#c6a0f6" : "#24273a"
+      radius: 15
     }
-    states: [
-      State {
-        name: "hovered"
-        when: sleepButton.hovered
-        PropertyChanges {
-          target: sleepButtonBg
-          color: "#F4DBD6"
-        }
-      }
-    ]
+    MouseArea {
+      anchors.fill: parent
+      hoverEnabled: true
+      cursorShape: Qt.PointingHandCursor
+      onClicked: sessionButton.clicked()  // propagate the click
+    }
     transitions: Transition {
       PropertyAnimation {
         properties: "color"

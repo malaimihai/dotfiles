@@ -53,6 +53,7 @@ Item {
       }
       MouseArea {
         anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
         onClicked: {
           sessionList.currentIndex = index
           sessionPopup.close()
@@ -69,39 +70,14 @@ Item {
       source: Qt.resolvedUrl("../icons/settings.svg")
       height: height
       width: width
-      color: "#CAD3F5"
+      color: (down || hovered || sessionPopup.visible) ? "#24273a" : "#CAD3F5"
     }
     background: Rectangle {
       id: sessionButtonBackground
-      color: "#24273a"
       radius: 15
+      color: (sessionButton.down || sessionButton.hovered || sessionPopup.visible)
+           ? "#c6a0f6" : "#24273a"
     }
-    states: [
-      State {
-        name: "pressed"
-        when: sessionButton.down
-        PropertyChanges {
-          target: sessionButtonBackground
-          color: "#5b6078"
-        }
-      },
-      State {
-        name: "hovered"
-        when: sessionButton.hovered
-        PropertyChanges {
-          target: sessionButtonBackground
-          color: "#5b6078"
-        }
-      },
-      State {
-        name: "selection"
-        when: sessionPopup.visible
-        PropertyChanges {
-          target: sessionButtonBackground
-          color: "#5b6078"
-        }
-      }
-    ]
     transitions: Transition {
       PropertyAnimation {
         properties: "color"
@@ -112,11 +88,17 @@ Item {
       sessionPopup.visible ? sessionPopup.close() : sessionPopup.open()
       sessionButton.state = "pressed"
     }
+    MouseArea {
+      anchors.fill: parent
+      hoverEnabled: true
+      cursorShape: Qt.PointingHandCursor
+      onClicked: sessionButton.clicked()  // propagate the click
+    }
   }
   Popup {
     id: sessionPopup
     width: inputWidth + padding * 2
-    x: (sessionButton.width + sessionList.spacing) * -8
+    x: (sessionButton.width + sessionList.spacing)
     y: -(contentHeight + padding * 2) + sessionButton.height
     padding: inputHeight / 10
     background: Rectangle {

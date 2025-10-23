@@ -15,25 +15,25 @@ Item {
       bottom: parent.bottom
       left: parent.left
     }
-    PowerButton {
-      id: powerButton
-    }
-    RebootButton {
-      id: rebootButton
-    }
-    SleepButton {
-      id: sleepButton
+    SessionPanel {
+      id: sessionPanel
     }
     z: 5
   }
-  Column {
+  Row {
     spacing: 8
     anchors {
       bottom: parent.bottom
       right: parent.right
     }
-    SessionPanel {
-      id: sessionPanel
+    SleepButton {
+      id: sleepButton
+    }
+    RebootButton {
+      id: rebootButton
+    }
+    PowerButton {
+      id: powerButton
     }
     z: 5
   }
