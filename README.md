@@ -14,11 +14,19 @@ First clone the repository locally and cd into it.
 Install the necessary packages:
 
 ```bash
- yay -S hypridle hyprlock hyprpaper kitty rofi waybar hyprshot swaync stow
+ yay -S hypridle hyprlock hyprpaper kitty rofi waybar hyprshot swaync stow ttf-cascadia-code-nerd
 ```
 
 Create symlinks for the dotfiles:
 
 ```bash
 stow -t "$HOME" hyprland kitty rofi waybar backgrounds
+```
+
+## Sddm Theme
+
+First install dependencies:
+
+```bash
+pacman -Syu qt6-svg qt6-declarative qt5-quickcontrols2
 ```
