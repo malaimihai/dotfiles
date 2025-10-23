@@ -56,7 +56,7 @@ Item {
       background: null
 
       font.family: root.fontFamily
-      font.pixelSize: 20
+      font.pixelSize: passwordField.text.length > 0 ? 28 : 20
       font.bold: true
 
       // No button: Enter submits
