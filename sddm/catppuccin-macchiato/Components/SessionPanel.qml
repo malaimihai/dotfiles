@@ -68,8 +68,8 @@ Item {
     hoverEnabled: true
     icon {
       source: Qt.resolvedUrl("../icons/settings.svg")
-      height: height
-      width: width
+      height: height - 25
+      width: width - 25
       color: (down || hovered || sessionPopup.visible) ? "#24273a" : "#CAD3F5"
     }
     background: Rectangle {

@@ -11,8 +11,8 @@ Item {
     hoverEnabled: true
     icon {
       source: Qt.resolvedUrl("../icons/reboot.svg")
-      height: height
-      width: width
+      height: height - 25
+      width: width - 25
       color: hovered ? "#24273a" : "#CAD3F5"
     }
     background: Rectangle {
@@ -24,7 +24,7 @@ Item {
       anchors.fill: parent
       hoverEnabled: true
       cursorShape: Qt.PointingHandCursor
-      onClicked: sessionButton.clicked()  // propagate the click
+      onClicked: sddm.reboot()
     }
     transitions: Transition {
       PropertyAnimation {
@@ -32,6 +32,5 @@ Item {
         duration: 300
       }
     }
-    onClicked: sddm.reboot()
   }
 }
