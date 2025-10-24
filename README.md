@@ -52,5 +52,3 @@ Current=catppuccin-macchiato
 ```
 
 Restart sddm to see the changes.
-
-TESING README AND IF MY OLLAMA COMMIT IS GENRATED GOOD
