@@ -20,7 +20,7 @@ Install the necessary packages:
 Create symlinks for the dotfiles:
 
 ```bash
-stow -t "$HOME" hyprland kitty rofi waybar backgrounds
+stow -t "$HOME" hyprland kitty rofi waybar backgrounds swaync
 ```
 
 ## Sddm Theme
